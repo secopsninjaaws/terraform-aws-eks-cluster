@@ -10,7 +10,9 @@ provider "helm" {
     }
   }
 }
-
+data "aws_ecrpublic_authorization_token" "token" {
+  provider = aws.virginia
+}
 resource "helm_release" "karpenter" {
     name       = "karpenter"
     repository = "oci://public.ecr.aws/karpenter"
@@ -18,6 +20,8 @@ resource "helm_release" "karpenter" {
     version    = var.chart_version
     namespace  = var.karpenter_namespace
     create_namespace = true
+    repository_username = data.aws_ecrpublic_authorization_token.token.user_name
+    repository_password = data.aws_ecrpublic_authorization_token.token.password
     depends_on = [
         aws_eks_cluster.main,
         aws_eks_node_group.main,
