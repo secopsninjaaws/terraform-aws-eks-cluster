@@ -2,7 +2,7 @@ provider "helm" {
   kubernetes {
     host                   = aws_eks_cluster.main.endpoint
     cluster_ca_certificate = base64decode(aws_eks_cluster.main.certificate_authority[0].data)
-    token                  = aws_eks_cluster.main.token
+    token                  = data.aws_eks_cluster_auth.eks.token
 
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
