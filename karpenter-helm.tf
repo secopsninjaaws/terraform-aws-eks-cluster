@@ -1,22 +1,14 @@
-data "aws_eks_cluster" "eks" {
-  name = module.eks.main.cluster_id
-}
-
-data "aws_eks_cluster_auth" "eks" {
-  name = module.eks.main.cluster_id
-}
-
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.eks.endpoint
+  host                   = aws_eks_cluster.main.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.eks.token
+  token                  = aws_eks_cluster_auth.main.token
 }
 
 provider "helm" {
   kubernetes {
-    host                   = data.aws_eks_cluster.eks.endpoint
+    host                   = aws_eks_cluster.main.endpoint
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.eks.token
+    token                  = aws_eks_cluster_auth.main.token
   }
 }
 resource "helm_release" "karpenter" {
