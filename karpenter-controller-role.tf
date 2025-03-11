@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "karpenter_controller_assume_role_policy" {
 
     principals {
       type        = "Federated"
-      identifiers = [aws_eks_cluster.main.identity[0].oidc[0].issuer]
+      identifiers = ["${replace(data.aws_eks_cluster.main.identity[0].oidc[0].issuer, "https://", "")}"]
     }
 
     condition {
@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "karpenter_controller_assume_role_policy" {
 }
 
 resource "aws_iam_role" "karpenter_controller" {
-  name               = "karpenter-controller-role"
+  name               = format("%s-karpenter-controller-role", var.project_name)
   assume_role_policy = data.aws_iam_policy_document.karpenter_controller_assume_role_policy.json
   tags = {
     Name = format("%s-karpenter-controller-role", var.project_name)
