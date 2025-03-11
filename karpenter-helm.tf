@@ -10,9 +10,6 @@ provider "helm" {
     }
   }
 }
-data "aws_ecrpublic_authorization_token" "token" {
-  provider = aws.virginia
-}
 resource "helm_release" "karpenter" {
     name       = "karpenter"
     repository = "https://charts.karpenter.sh/"
