@@ -28,11 +28,9 @@ resource "helm_release" "karpenter" {
     aws_iam_policy_attachment.karpenter_controller_policy_attachment,
     aws_iam_instance_profile.karpenter
   ]
-  set_sensitive {
-    name = "serviceAccount.annotations"
-    value = jsonencode({
-      "eks.amazonaws.com/role-arn" = aws_iam_role.karpenter_controller.arn
-    })
+  set {
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = aws_iam_role.karpenter_controller.arn
   }
 
   set {
