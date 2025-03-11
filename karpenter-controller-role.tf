@@ -5,12 +5,12 @@ data "aws_iam_policy_document" "karpenter_controller_assume_role_policy" {
 
     principals {
       type        = "Federated"
-      identifiers = ["${replace(data.aws_eks_cluster.main.identity[0].oidc[0].issuer, "https://", "")}"]
+      identifiers = ["${replace(aws_eks_cluster.main.identity[0].oidc[0].issuer, "https://", "")}"]
     }
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(data.aws_eks_cluster.main.identity[0].oidc[0].issuer, "https://", "")}:sub"
+      variable = "${replace(aws_eks_cluster.main.identity[0].oidc[0].issuer, "https://", "")}:sub"
       values   = ["system:serviceaccount:${var.karpenter_namespace}:karpenter"]
     }
   }
