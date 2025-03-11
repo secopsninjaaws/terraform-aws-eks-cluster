@@ -83,3 +83,10 @@ variable "chart_version" {
   default     = "0.16.3"
 
 }
+
+variable "region" {
+  description = "The region for the EKS cluster"
+  type        = string
+  default     = "us-east-1"
+
+}
