@@ -33,7 +33,7 @@ resource "aws_iam_role_policy_attachment" "karpenter_controller_policy_attachmen
 resource "aws_iam_policy" "karpenter_controller" {
   name        = format("%s-karpenter-controller-policy", var.project_name)
   description = "Policy for Karpenter controller"
-  policy      = file("./controller-trust-policy.json")
+  policy      = file("${path.module}/controller-trust-policy.json")
 }
 
 resource "aws_iam_policy_attachment" "karpenter_controller_policy_attachment" {
