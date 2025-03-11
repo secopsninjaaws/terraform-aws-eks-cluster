@@ -1,7 +1,7 @@
 provider "helm" {
   kubernetes {
     host                   = aws_eks_cluster.main.endpoint
-    cluster_ca_certificate = base64decode(tls_certificate.eks_oidc_tls_certificate.certificates[1].sha1_fingerprint)
+    cluster_ca_certificate = base64decode(data.tls_certificate.eks_oidc_tls_certificate.certificates[1].sha1_fingerprint)
 
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
