@@ -13,7 +13,7 @@ provider "helm" {
 
 resource "helm_release" "karpenter" {
     name       = "karpenter"
-    repository = "oci://public.ecr.aws/"
+    repository = "oci://public.ecr.aws/karpenter"
     chart      = "karpenter"
     version    = var.chart_version
     namespace  = var.karpenter_namespace
