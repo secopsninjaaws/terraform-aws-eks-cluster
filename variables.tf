@@ -76,3 +76,10 @@ variable "karpenter_namespace" {
   type        = string
   default     = "karpenter"
 }
+
+variable "chart_version" {
+  description = "The version of the Karpenter chart"
+  type        = string
+  default     = "1.3.2"
+  
+}
