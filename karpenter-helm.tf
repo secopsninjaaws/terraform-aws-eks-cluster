@@ -13,8 +13,9 @@ provider "helm" {
 
 resource "helm_release" "karpenter" {
     name       = "karpenter"
-    repository = "https://charts.karpenter.sh"
-    chart      = var.chart_version
+    repository = "oci://public.ecr.aws/"
+    chart      = "karpenter"
+    version    = var.chart_version
     namespace  = var.karpenter_namespace
     create_namespace = true
     depends_on = [
