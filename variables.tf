@@ -77,3 +77,9 @@ variable "disk_size" {
   default     = 50
 
 }
+
+variable "karpenter_namespace" {
+  description = "The namespace for Karpenter"
+  type        = string
+  default     = "karpenter"
+}
