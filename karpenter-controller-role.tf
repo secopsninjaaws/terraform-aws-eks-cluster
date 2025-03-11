@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "karpenter_controller_assume_role_policy" {
       values   = ["system:serviceaccount:${var.karpenter_namespace}:karpenter"]
     }
   }
-  
+
 }
 
 resource "aws_iam_role" "karpenter_controller" {
@@ -43,9 +43,9 @@ resource "aws_iam_policy_attachment" "karpenter_controller_policy_attachment" {
 }
 
 resource "aws_iam_instance_profile" "karpenter" {
-    name = format("%s-karpenter-instance-profile", var.project_name)
-    role = aws_iam_role.karpenter_controller.name
-    tags = {
-        Name = format("%s-karpenter-instance-profile", var.project_name)
-    }
+  name = format("%s-karpenter-instance-profile", var.project_name)
+  role = aws_iam_role.karpenter_controller.name
+  tags = {
+    Name = format("%s-karpenter-instance-profile", var.project_name)
+  }
 }

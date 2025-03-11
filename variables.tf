@@ -81,5 +81,5 @@ variable "chart_version" {
   description = "The version of the Karpenter chart"
   type        = string
   default     = "0.16.3"
-  
+
 }
