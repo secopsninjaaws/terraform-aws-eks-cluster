@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "karpenter_controller_assume_role_policy" {
     condition {
       test     = "StringEquals"
       variable = "${aws_eks_cluster.main.identity[0].oidc[0].issuer}:sub"
-      values   = ["system:serviceaccount:${var.karpenter_namespace}:karpenter-controller"]
+      values   = ["system:serviceaccount:${var.karpenter_namespace}:karpenter"]
     }
   }
   

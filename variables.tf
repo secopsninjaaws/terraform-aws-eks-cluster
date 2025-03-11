@@ -11,13 +11,6 @@ variable "project_name" {
   default     = "Lucas-EKS-Module"
 
 }
-
-variable "cluster_name" {
-  description = "The name of the EKS cluster"
-  type        = string
-  default     = "Lucas-EKS-Module"
-
-}
 variable "private_aws_subnet_1a_id" {
   description = "The private subnet in the first availability zone"
   type        = string

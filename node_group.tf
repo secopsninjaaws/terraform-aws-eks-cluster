@@ -1,5 +1,5 @@
 resource "aws_eks_node_group" "main" {
-  cluster_name    = var.cluster_name
+  cluster_name    = aws_eks_cluster.main.name
   node_group_name = format("%s-node-group", var.project_name)
   node_role_arn   = aws_iam_role.eks_node_group_role.arn
   subnet_ids      = [var.private_aws_subnet_1a_id, var.private_aws_subnet_1b_id, var.private_aws_subnet_1c_id]
