@@ -13,7 +13,7 @@ provider "helm" {
 
 resource "helm_release" "karpenter" {
     name       = "karpenter"
-    repository = "https://awslabs.github.io/karpenter/charts"
+    repository = "https://charts.karpenter.sh"
     chart      = var.chart_version
     namespace  = var.karpenter_namespace
     create_namespace = true
