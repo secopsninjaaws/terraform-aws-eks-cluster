@@ -15,7 +15,7 @@ data "aws_ecrpublic_authorization_token" "token" {
 }
 resource "helm_release" "karpenter" {
     name       = "karpenter"
-    repository = "oci://public.ecr.aws/karpenter/karpenter"
+    repository = "https://charts.karpenter.sh/"
     chart      = "karpenter"
     version    = var.chart_version
     namespace  = var.karpenter_namespace
