@@ -36,8 +36,8 @@
             ],
             "Resource": "*",
             "Condition": {
-                "StringEquals": {
-                    "iam:PassedToService": "ec2.amazonaws.com"
+                "StringLike": {
+                    "ec2:ResouceTag/Name": "*karpenter*"
                 }
             }
         },
