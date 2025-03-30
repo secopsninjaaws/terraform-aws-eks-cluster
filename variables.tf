@@ -11,42 +11,29 @@ variable "project_name" {
   default     = "Lucas-EKS-Module"
 
 }
-variable "private_aws_subnet_1a_id" {
+variable "private_subnets" {
   description = "The private subnet in the first availability zone"
-  type        = string
-
-}
-
-variable "private_aws_subnet_1b_id" {
-  description = "The private subnet in the second availability zone"
-  type        = string
-
-}
-
-variable "private_aws_subnet_1c_id" {
-  description = "The private subnet in the third availability zone"
-  type        = string
-
+  type        = list(string)
 }
 
 variable "desired_size" {
   description = "The desired number of worker nodes"
   type        = number
-  default     = 1
+  default     = 2
 
 }
 
 variable "max_size" {
   description = "The maximum number of worker nodes"
   type        = number
-  default     = 2
+  default     = 3
 
 }
 
 variable "min_size" {
   description = "The minimum number of worker nodes"
   type        = number
-  default     = 1
+  default     = 2
 
 }
 
@@ -71,22 +58,15 @@ variable "disk_size" {
 
 }
 
-variable "karpenter_namespace" {
-  description = "The namespace for Karpenter"
-  type        = string
-  default     = "karpenter"
-}
-
-variable "chart_version" {
-  description = "The version of the Karpenter chart"
-  type        = string
-  default     = "0.16.3"
-
-}
-
 variable "region" {
   description = "The region for the EKS cluster"
   type        = string
   default     = "us-east-1"
 
+}
+
+variable "public_endpoint" {
+  description = "Enable public endpoint for the EKS cluster"
+  type        = bool
+  default     = false
 }
