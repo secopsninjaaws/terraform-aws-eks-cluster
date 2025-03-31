@@ -70,23 +70,26 @@ Um **OIDC Provider** é configurado automaticamente para permitir que o cluster 
 ## 💻 Exemplo de Uso
 
 ```hcl
+locals {
+  eks_variables = {
+    cluster_name   = "Lucas-EKS-Module"
+    desired_size   = 1
+    max_size       = 2
+    min_size       = 1
+    instance_types = ["t3.medium"]
+    capacity_type  = "SPOT"
+    disk_size      = 50
+  }
+}
+
 module "eks" {
-  source = "./modules/eks"
-
-  project_name     = "meu-projeto-eks"
-  private_subnets  = ["subnet-abc123", "subnet-def456"]
-
-  # Configuração do Node Group
-  desired_size     = 3
-  max_size         = 5
-  min_size         = 2
-  instance_types   = ["t3.large"]
-  capacity_type    = "ON_DEMAND"
-
-  # Acesso ao cluster
-  public_endpoint  = true
+  source          = "./modules/eks"
+  private_subnets = 
+  desired_size    = local.eks_variables.desired_size
+  max_size        = local.eks_variables.max_size
+  min_size        = local.eks_variables.min_size
+  instance_types  = local.eks_variables.instance_types
+  capacity_type   = local.eks_variables.capacity_type
+  disk_size       = local.eks_variables.disk_size
 }
-
-output "cluster_name" {
-  value = module.eks.eks_cluster_name
-}
+```
