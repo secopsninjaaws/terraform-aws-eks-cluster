@@ -83,7 +83,7 @@ locals {
 }
 
 module "eks" {
-  source  = "app.terraform.io/secopsninjaaws/eks-cluster/aws"
+  source  = "secopsninjaaws/eks-cluster/aws"
   private_subnets = 
   desired_size    = local.eks_variables.desired_size
   max_size        = local.eks_variables.max_size
